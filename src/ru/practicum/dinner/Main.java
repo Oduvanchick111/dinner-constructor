@@ -52,14 +52,20 @@ public class Main {
         scanner.nextLine();
 
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
-        String nextItem = scanner.nextLine();
 
         //реализуйте ввод типов блюд
-        while (!nextItem.isEmpty()) {
-
+        while (true) {
+            String nextItem = scanner.nextLine();
+            if (nextItem.isEmpty()) {
+                break;
+            } else {
+                dc.addWishes(nextItem);
+            }
         }
 
         // сгенерируйте комбинации блюд и выведите на экран
+        dc.generateDishCombo(numberOfCombos, dc.wishes);
+
 
     }
 }
