@@ -40,8 +40,12 @@ public class Main {
         String dishType = scanner.nextLine();
         System.out.println("Введите название блюда:");
         String dishName = scanner.nextLine();
-
-        dc.addDish(dishType, dishName);
+        if (!dc.checkOnRepeat(dishType, dishName)) {
+            dc.addDish(dishType, dishName);
+            System.out.println("Блюдо добавлено в меню");
+        } else {
+            System.out.println("Такое блюдо уже есть");
+        }
     }
 
     private static void generateDishCombo() {
@@ -59,13 +63,14 @@ public class Main {
             if (nextItem.isEmpty()) {
                 break;
             } else {
-                dc.addWishes(nextItem);
+                if (dc.checkType(nextItem)) {
+                    dc.addWishes(nextItem);
+                } else {
+                    System.out.println("У нас такого нет(((");
+                }
             }
         }
-
         // сгенерируйте комбинации блюд и выведите на экран
         dc.generateDishCombo(numberOfCombos, dc.wishes);
-
-
     }
 }
