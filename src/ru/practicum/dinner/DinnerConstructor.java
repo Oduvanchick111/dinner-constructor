@@ -27,22 +27,27 @@ public class DinnerConstructor {
         wishes.add(dish);
     }
 
-    void generateDishCombo(int numberOfCombos, ArrayList<String> wishes) {
+    ArrayList<ArrayList<String>> generateDishCombo(int numberOfCombos, ArrayList<String> wishes) {
         Random random = new Random();
-
+        ArrayList<ArrayList<String>> combos = new ArrayList<>();
         for (int i = 1; i <= numberOfCombos; i++) {
-            System.out.println("Комбо №" + i + ":");
             ArrayList<String> generatedCombo = new ArrayList<>();
-
             for (String wish : wishes) {
                 ArrayList<String> dishes = dinnerByCategories.get(wish);
                 int randomNumber = random.nextInt(dishes.size());
                 generatedCombo.add(dishes.get(randomNumber));
             }
-            System.out.println(generatedCombo);
-
+            combos.add(generatedCombo);
         }
-        wishes.clear();
+        this.wishes.clear();
+        return combos;
+    }
+
+    void writeCombos (ArrayList<ArrayList<String>> something) {
+        for (int i = 0; i < something.size(); i++) {
+            System.out.println("Комбинация №" + (i+1) + ":");
+            System.out.println(something.get(i));
+        }
     }
 
     boolean checkType(String type) {

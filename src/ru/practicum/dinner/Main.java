@@ -71,6 +71,7 @@ public class Main {
             }
         }
         // сгенерируйте комбинации блюд и выведите на экран
-        dc.generateDishCombo(numberOfCombos, dc.wishes);
+        dc.writeCombos(dc.generateDishCombo(numberOfCombos, dc.wishes));
+
     }
 }
