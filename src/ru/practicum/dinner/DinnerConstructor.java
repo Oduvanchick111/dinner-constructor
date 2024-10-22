@@ -42,13 +42,14 @@ public class DinnerConstructor {
             System.out.println(generatedCombo);
 
         }
+        wishes.clear();
     }
 
     boolean checkType(String type) {
         return dinnerByCategories.containsKey(type);
     }
 
-    boolean checkOnRepeat (String dishType, String dishName) {
+    boolean checkOnRepeat(String dishType, String dishName) {
         if (!dinnerByCategories.isEmpty()) {
             if (dinnerByCategories.containsKey(dishType)) {
                 return dinnerByCategories.get(dishType).contains(dishName);
