@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class DinnerConstructor {
-    ArrayList<String> wishes = new ArrayList<>();
+
+    private final Random random = new Random();
     private final HashMap<String, ArrayList<String>> dinnerByCategories;
 
     DinnerConstructor() {
@@ -13,22 +14,16 @@ public class DinnerConstructor {
     }
 
     void addDish(String dishType, String dishName) {
-        if (dinnerByCategories.containsKey(dishType)) {
-            ArrayList<String> dishes = dinnerByCategories.get(dishType);
-            dishes.add(dishName);
-        } else {
-            ArrayList<String> dishes = new ArrayList<>();
-            dishes.add(dishName);
-            dinnerByCategories.put(dishType, dishes);
+        ArrayList<String> dishes = dinnerByCategories.computeIfAbsent(dishType, k -> new ArrayList<>());
+        if (dishes.contains(dishName)) {
+            System.out.println("Блюдо с названием " + dishName + " уже есть");
+            return;
         }
-    }
-
-    void addWishes(String dish) {
-        wishes.add(dish);
+        dishes.add(dishName);
     }
 
     void generateDishCombo(int numberOfCombos, ArrayList<String> wishes) {
-        Random random = new Random();
+
 
         for (int i = 1; i <= numberOfCombos; i++) {
             System.out.println("Комбо №" + i + ":");
@@ -47,18 +42,6 @@ public class DinnerConstructor {
 
     boolean checkType(String type) {
         return dinnerByCategories.containsKey(type);
-    }
-
-    boolean checkOnRepeat(String dishType, String dishName) {
-        if (!dinnerByCategories.isEmpty()) {
-            if (dinnerByCategories.containsKey(dishType)) {
-                return dinnerByCategories.get(dishType).contains(dishName);
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
     }
 }
 
